@@ -35,5 +35,15 @@ namespace RestaurantRaterAPI_.Controllers
         public void Delete(int id)
         {
         }
+
+        // Method to return a random number as example of GET
+        // Attribute added to specify the route taken to get/create/label the endpoint
+        // Route sets the method apart from other gets/posts/etc, routes are needed when many endpoints are used 
+        [Route("api/GetRandomInt")]
+        public int GetRandomInt()
+        {
+            Random rand = new Random();
+            return rand.Next();
+        }
     }
 }
