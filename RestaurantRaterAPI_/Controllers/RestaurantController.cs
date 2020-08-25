@@ -66,7 +66,40 @@ namespace RestaurantRaterAPI_.Controllers
 
 
         // -- Update (PUT)
+        [HttpPut]
+        // Attributes given to/within the parameters to show where it's pulled/comes from
+        public async Task<IHttpActionResult> UpdateRestaurant([FromUri]int id, [FromBody]Restaurant updatedRestaurant)
+        {
+            // Check if our updated restaurant is valid
+            if (ModelState.IsValid)
+            {
+                // Find and update the appropriate restaurant 
+                Restaurant restaurant = await _context.Restaurants.FindAsync(id);
+
+                if (restaurant != null)
+                {
+                    // Update the restaurant now that we found it
+                    restaurant.Name = updatedRestaurant.Name;
+                    restaurant.Rating = updatedRestaurant.Rating;
+
+                    // use await to save in the new context & give ok status code
+                    await _context.SaveChangesAsync();
+
+                    return Ok();
+                }
+                // Didn't find the restaurant
+                return NotFound();
+            }
+            // Return a bad request if not found
+            return BadRequest(ModelState);
+        }
+
 
         // -- Delete (DELETE)
+        [HttpDelete]
+        public async Task<IHttpActionResult> DeleteRestaurant([FromUri]int id)
+        {
+
+        }
     }
 }
