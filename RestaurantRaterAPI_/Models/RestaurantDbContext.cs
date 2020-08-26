@@ -13,5 +13,6 @@ namespace RestaurantRaterAPI_.Models
 
         // Created a restaurants property that stores all of the restaurant objects, this is what will be the table in our database
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
     }
 }
